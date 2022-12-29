@@ -114,6 +114,7 @@ namespace test002
             return res;
         }
 
+
         static void Main(string[] args)
         {
             string input = Console.ReadLine();
