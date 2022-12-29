@@ -1,0 +1,14 @@
+G:\програмирование\с#\Hillel\HW01_Calc\bin\Debug\HW01_Calc.exe.config
+G:\програмирование\с#\Hillel\HW01_Calc\bin\Debug\HW01_Calc.exe
+G:\програмирование\с#\Hillel\HW01_Calc\bin\Debug\HW01_Calc.pdb
+G:\програмирование\с#\Hillel\HW01_Calc\obj\Debug\HW01_Calc.csproj.AssemblyReference.cache
+G:\програмирование\с#\Hillel\HW01_Calc\obj\Debug\HW01_Calc.csproj.CoreCompileInputs.cache
+G:\програмирование\с#\Hillel\HW01_Calc\obj\Debug\HW01_Calc.exe
+G:\програмирование\с#\Hillel\HW01_Calc\obj\Debug\HW01_Calc.pdb
+C:\Git\c#\Hillel\HW01_Calc\bin\Debug\HW01_Calc.exe.config
+C:\Git\c#\Hillel\HW01_Calc\bin\Debug\HW01_Calc.exe
+C:\Git\c#\Hillel\HW01_Calc\bin\Debug\HW01_Calc.pdb
+C:\Git\c#\Hillel\HW01_Calc\obj\Debug\HW01_Calc.csproj.AssemblyReference.cache
+C:\Git\c#\Hillel\HW01_Calc\obj\Debug\HW01_Calc.csproj.CoreCompileInputs.cache
+C:\Git\c#\Hillel\HW01_Calc\obj\Debug\HW01_Calc.exe
+C:\Git\c#\Hillel\HW01_Calc\obj\Debug\HW01_Calc.pdb
