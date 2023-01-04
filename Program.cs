@@ -20,6 +20,11 @@ namespace test002
           /*{'%',5 } */
             };
 
+        public class CalcException : Exception
+        {
+            public CalcException(string message) : base(message) { }
+        }
+
         static double Calc(List<string> res)
         {
             double num1, num2;
@@ -41,14 +46,20 @@ namespace test002
                     }
                     else
                     {
-                        throw new Exception("InvalidInput");
+                        throw new CalcException("некорректный ввод:\n"+res[0].ToString());
                     }
                 }
             }
             if (res.Count == 3)
             {
-                if (!(double.TryParse(res[0].ToString(), out num1))) num1 = Calc(SplitByOp(res[0].ToString()));
-                if (!(double.TryParse(res[2].ToString(), out num2))) num2 = Calc(SplitByOp(res[2].ToString()));
+                if (!(double.TryParse(res[0].ToString(), out num1)))
+                {
+                    num1 = Calc(SplitByOp(res[0].ToString()));
+                }
+                if (!(double.TryParse(res[2].ToString(), out num2)))
+                {
+                    num2 = Calc(SplitByOp(res[2].ToString()));
+                }
                 return DoOp(num1, num2, res[1][0]);
             }
             int indMaxPrior = 1, MaxPrior = 0;
@@ -78,20 +89,26 @@ namespace test002
                     {
                         return num1 / num2;
                     }
-                    throw new Exception("DevByZero");
+                    throw new CalcException("деление на ноль:\n" + num1 + '/' + num2);
                 default:
-                    throw new Exception("InvalidOp");
+                    throw new CalcException("оператор не распознан:\n"+op);
             }
         }
 
         static List<string> SplitByOp(string str)
         {
+            
             List<string> res = new List<string> { };
             int j = 0, brCounter = str[0] == '(' ? 1 : 0;
 
-            if (Separators.Contains(str[0]) && !(str[0] == '-')) throw new Exception("NoFirstOp");
-
-            if (Separators.Contains(str[str.Length - 1])) throw new Exception("NoSecondOp");
+            if (Separators.Contains(str[0]) && !(str[0] == '-'))
+            {
+                throw new CalcException("отсутствует первое число при операторе:\n" + str);
+            }
+            if (Separators.Contains(str[str.Length - 1]))
+            {
+                throw new CalcException("отсутствует второе число при операторе:\n"+str);
+            }
 
             for (int i = 1; i < str.Length; i++)
             {
@@ -99,6 +116,10 @@ namespace test002
 
                 if (brCounter == 0 && Separators.Contains(str[i]) && !(i == j && str[i] == '-' && str[i - 1] != ')'))
                 {
+                    if (i == j)
+                    {
+                        throw new CalcException("двойной оператор:\n" + str[i-1] + str[i]);
+                    }
                     res.Add(str.Substring(j, i - j));
                     res.Add(str[i].ToString());
                     j = i + 1;
@@ -109,7 +130,7 @@ namespace test002
             res.Add(str.Substring(j, str.Length - j).ToString());
             if (brCounter != 0)
             {
-                throw new Exception("BracketCountErr");
+                throw new CalcException("количество открывающих и закрывающих скобок не совпадает");
             }
             return res;
         }
@@ -117,15 +138,19 @@ namespace test002
         static void Main(string[] args)
         {
             string input = Console.ReadLine();
-            //string input = "(-(12,23/45+221-44/4)*(2*(21-8))+(56/8*-7/9))-98/(45*-3)";
+            //string input = "65,43-34,70*443,1-(324,68/6,65)";
             input = input.Replace(" ", "").Replace(".", ",");
             try
             {
                 Console.WriteLine(Calc(SplitByOp(input)));
             }
+            catch (CalcException e)
+            {
+                Console.WriteLine("ошибка при вводе данных: " + e.Message);
+            }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine("при работе программы возникло исключение: " + e.Message);
             }
         }
     }
