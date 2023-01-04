@@ -97,10 +97,10 @@ namespace test002
 
         static List<string> SplitByOp(string str)
         {
-            
-            List<string> res = new List<string> { };
-            int j = 0, brCounter = str[0] == '(' ? 1 : 0;
-
+            if (str.Length==0)
+            {
+                throw new CalcException("пустая строка");
+            }
             if (Separators.Contains(str[0]) && !(str[0] == '-'))
             {
                 throw new CalcException("отсутствует первое число при операторе:\n" + str);
@@ -109,6 +109,9 @@ namespace test002
             {
                 throw new CalcException("отсутствует второе число при операторе:\n"+str);
             }
+
+            List<string> res = new List<string> { };
+            int j = 0, brCounter = str[0] == '(' ? 1 : 0;
 
             for (int i = 1; i < str.Length; i++)
             {
